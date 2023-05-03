@@ -1,10 +1,6 @@
-// console.log("Hi, guys!!!")
-
 const contacts = require('./contacts');
-
-// contacts.listContacts();
-
 const { Command } = require("commander");
+
 const program = new Command();
 program
   .option("-a, --action <type>", "choose action")
@@ -36,8 +32,9 @@ async function invokeAction({ action, id, name, email, phone }) {
     //   break;
 
     case "remove":
-      // ... id
-      break;
+      const removedContact = await contacts.removeContact(id);
+        return console.table(removedContact);
+    //   break;
 
     default:
       console.warn("\x1B[31m Unknown action type!");

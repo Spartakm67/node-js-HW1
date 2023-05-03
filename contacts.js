@@ -8,9 +8,9 @@ const contactsPath = path.join(__dirname, "db/contacts.json");
 async function listContacts() {
   // try {
     const data = await fs.readFile(contactsPath);
-    const contactsList = JSON.parse(data);;
+    const contacts = JSON.parse(data);;
     // console.log(contactsList);
-    return contactsList;
+    return contacts;
   // } catch (error) {
   //   console.log(error.message);
   // }
@@ -23,17 +23,24 @@ async function getContactById(contactId) {
 }
 
 async function removeContact(contactId) {
-  // ...твій код
+  const contacts = await listContacts();
+  const index = contacts.findIndex(contact => contact.id === contactId);
+    if (index === -1) {
+      return null;
+  }
+  const [result] = contacts.splice(index, 1);
+    await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+    return result;
 }
 
 async function addContact(data) {
-  const contactsList = await listContacts();
+  const contacts = await listContacts();
   const newContact = {
     id: nanoid(),
     ...data,
   };
-    contactsList.push(newContact);
-    await fs.writeFile(contactsPath, JSON.stringify(contactsList, null, 2));
+    contacts.push(newContact);
+    await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
     return newContact;
 }
 
