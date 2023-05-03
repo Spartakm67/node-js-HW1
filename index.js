@@ -1,1 +1,5 @@
-console.log("Hi, guys!");
+console.log("Hi, guys!")
+
+const contacts = require('./contacts');
+
+contacts.listContacts();
