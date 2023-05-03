@@ -13,29 +13,24 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторить
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
       const contactsList = await contacts.listContacts();
       return console.table(contactsList);
-    //   break;
-
+    
     case "get":
           const oneContact = await contacts.getContactById(id);
           return console.table(oneContact);
-    //   break;
-
+    
     case "add":
       const addContact = await contacts.addContact({ name, email, phone });
       return console.table(addContact);
-    //   break;
-
+    
     case "remove":
       const removedContact = await contacts.removeContact(id);
-        return console.table(removedContact);
-    //   break;
-
+      return console.table(removedContact);
+    
     default:
       console.warn("\x1B[31m Unknown action type!");
   }
