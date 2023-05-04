@@ -5,6 +5,7 @@ Run the commands in the terminal and add a separate screenshot of the result of 
 # Receive and display the entire list of contacts in the form of a table (console.table)
 
 node index.js --action="list"
+\n
 https://ibb.co/VtNfsDj
 
 # Get a contact by id
